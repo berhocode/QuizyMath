@@ -30,6 +30,7 @@ def math_quiz():
     difficulty = input("Enter the difficulty (easy, medium, hard) > ").lower()
     if difficulty not in ["easy", "medium", "hard"]:
         print(f"{difficulty} is invalid, Defaulting to EASY...")
+        difficulty = "easy"
 
     score = 0
     total_questions = 5
