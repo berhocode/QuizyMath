@@ -1,9 +1,13 @@
+# Math Quiz Game, By Aymane Berhoua (@berhocode)
+
+# importing modules:
 import random
 import time
 
-def genarate_question(difficulty):
-    operators = ["+", "-", "*", "/"]
-    op = random.choice(operators)
+# Generating Question Function:
+def generate_question(difficulty):
+    operations = ["+", "-", "*", "/"]
+    op = random.choice(operations)
 
     if difficulty == "easy":
         num1, num2 = random.randint(1, 10), random.randint(1, 10)
@@ -19,42 +23,50 @@ def genarate_question(difficulty):
     answer = eval(question)
     return question, round(answer, 2)
 
-def math_quiz():
-    sentence = "Welcome to our Math Quiz Game!"
-    for i in range(len(sentence)):
-        print(f"\r{sentence[:i+1]}", end="")
-        time.sleep(0.1)
 
+# Math Quiz Game Function:
+def math_quiz():
+    # Welcoming the user:
+    sentence =  "Welcome To Our Math Quiz!"
+    for i in range(len(sentence)):
+        print(f"\r{sentence[:i+1]}", end=" ")
+        time.sleep(0.1)
     print()
 
+    # Choosing difficulty:
     difficulty = input("Enter the difficulty (easy, medium, hard) > ").lower()
     if difficulty not in ["easy", "medium", "hard"]:
-        print(f"{difficulty} is invalid, Defaulting to EASY...")
+        print("invalid input!, defaulting to EASY...")
         difficulty = "easy"
 
-    score = 0
     total_questions = 5
+    score = 0
 
+    # Game loop
     for _ in range(total_questions):
-        question, correct_answer = genarate_question(difficulty)
-
+        question, correct_answer = generate_question(difficulty)
         try:
-            user_answer = float(input(f"Solve: {question} > "))
-            if user_answer == correct_answer:
+            answer = float(input(f"Solve: {question} > "))
+            if answer == correct_answer:
                 print("Correct!")
                 score+=1
             else:
                 print(f"Wrong, the answer was {correct_answer}")
         except ValueError:
-            print("invalid input, skiping question...")
+            print("Invalid input!, Skiping question...")
 
-        
-    print(f"Game Over!, Your total score is {score}/{total_questions}")
+    print(f"Game Over!, Your score is {score}/{total_questions}")
 
-    repeat = input("Play again? (y/n) > ")
-    if repeat.lower() == "y":
+    # ask user to Play again:
+    stay = input("Play again? (y/n) > ").lower()
+    if stay == "y":
         math_quiz()
     else:
+        exit_game = "Exiting Program..."
+        for i in range(len(exit_game)):
+            print(f"\r{exit_game[:i+1]}", end=" ")
+            time.sleep(0.1)
+        print()
         quit()
 
 if __name__ == "__main__":
